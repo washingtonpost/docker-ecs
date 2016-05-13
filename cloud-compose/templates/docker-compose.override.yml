@@ -1,0 +1,17 @@
+version: '2'
+services:
+  ecs:
+    environment:
+      INSTANCE_IP: ${INSTANCE_IP}
+      ECS_CLUSTER: {{ name }}
+      ECS_AVAILABLE_LOGGING_DRIVERS:
+      ECS_ENGINE_AUTH_DATA:
+      ECS_ENGINE_AUTH_TYPE:
+    {%- if logging is defined %}
+    logging:
+      driver: {{ logging.driver }}
+      options:
+        {% for key, option in logging.options %}
+        {{ key }}: {{ option }}
+        {% endfor %}
+    {% endif %}
