@@ -8,7 +8,7 @@ cluster:
     meta:
       group: /cloud-compose/${CLUSTER_NAME}
   aws:
-    ami: ${IMAGE_ID}
+    ami: ${IMAGE_ID} or ${IMAGE_NAME_TAG}
     instance_policy: '{ "Version": "2012-10-17", "Statement": [ { "Effect": "Allow", "Action": [ "ecs:DeregisterContainerInstance", "ecs:DiscoverPollEndpoint", "ecs:Poll", "ecs:RegisterContainerInstance", "ecs:StartTelemetrySession", "ecs:Submit*", "ecr:GetAuthorizationToken", "ecr:BatchCheckLayerAvailability", "ecr:GetDownloadUrlForLayer", "ecr:BatchGetImage" ], "Resource": "*" }, { "Action": [ "logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents" ], "Effect": "Allow", "Resource": "*" } ] }'
     username: ${IMAGE_USERNAME}
     terminate_protection: false
@@ -46,3 +46,9 @@ cluster:
         - ${CLUSTER_SUBNET_0}
         - ${CLUSTER_SUBNET_1}
         - ${CLUSTER_SUBNET_2}
+image:
+  name: docker
+  version: '1.10'
+  search_path:
+    - docker-ecs
+    - docker-ecs/cloud-compose/templates
