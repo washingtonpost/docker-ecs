@@ -4,9 +4,12 @@ services:
     environment:
       INSTANCE_IP: ${INSTANCE_IP}
       ECS_CLUSTER: {{ name }}
-      ECS_AVAILABLE_LOGGING_DRIVERS: {{ ECS_AVAILABLE_LOGGING_DRIVERS|default("") }}
-      ECS_ENGINE_AUTH_DATA: {{ ECS_ENGINE_AUTH_DATA|default("") }}
-      ECS_ENGINE_AUTH_TYPE: {{ ECS_ENGINE_AUTH_TYPE|default("") }}
+      {%- if ECS_ENGINE_AUTH_DATA is defined %}
+      ECS_ENGINE_AUTH_DATA: '{{ ECS_ENGINE_AUTH_DATA }}'
+      {%- endif %}
+      {%- if ECS_ENGINE_AUTH_DATA is defined %}
+      ECS_ENGINE_AUTH_TYPE: {{ ECS_ENGINE_AUTH_TYPE }}
+      {%- endif %}
     {%- if logging is defined %}
     logging:
       driver: {{ logging.driver }}
