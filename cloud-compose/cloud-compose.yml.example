@@ -32,13 +32,6 @@ cluster:
               size: 19G
             - name: metadata
               size: 900M
-      - name: data
-        size: 10G
-        block: /dev/xvdc
-        file_system: ext4
-        meta:
-          format: true
-          mount: /data/mongodb
     tags:
       datadog: monitored
     asg:
