@@ -1,8 +1,8 @@
 cluster:
   name: ${CLUSTER_NAME}
   search_path:
-    - docker-ecs
-    - docker-ecs/cloud-compose/templates
+    - ../docker-ecs
+    - ../docker-ecs/cloud-compose/templates
   logging:
     driver: awslogs
     meta:
@@ -39,9 +39,3 @@ cluster:
         - ${CLUSTER_SUBNET_0}
         - ${CLUSTER_SUBNET_1}
         - ${CLUSTER_SUBNET_2}
-image:
-  name: docker
-  version: '1.10'
-  search_path:
-    - docker-ecs
-    - docker-ecs/cloud-compose/templates
