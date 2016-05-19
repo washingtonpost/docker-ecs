@@ -1,6 +1,7 @@
 version: '2'
 services:
   ecs:
+    container_name: ecs-agent
     image: amazon/amazon-ecs-agent:latest
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"

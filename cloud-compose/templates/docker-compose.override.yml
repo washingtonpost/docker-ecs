@@ -10,11 +10,10 @@ services:
       {%- if ECS_ENGINE_AUTH_DATA is defined %}
       ECS_ENGINE_AUTH_TYPE: {{ ECS_ENGINE_AUTH_TYPE }}
       {%- endif %}
-    {%- if logging is defined %}
+    {%- if logging is defined and logging.driver is defined and logging.driver == "awslogs" %}
     logging:
-      driver: {{ logging.driver }}
+      driver: awslogs
       options:
-        {% for key, option in logging.options %}
-        {{ key }}: {{ option }}
-        {% endfor %}
-    {% endif %}
+        awslogs-group: {{ logging.meta.group }}
+        awslogs-stream: ecs-agent.${INSTANCE_IP}
+    {%- endif %}
