@@ -4,3 +4,6 @@
 {% include "docker.config.sh" %}
 {% include "docker_compose.run.sh" %}
 {% include "system.network_conf.sh" %}
+{# Optional template for datadog metrics
+{% include "datadog.docker.sh" %}
+#}
