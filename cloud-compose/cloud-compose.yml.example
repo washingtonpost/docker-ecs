@@ -39,3 +39,38 @@ cluster:
         - ${CLUSTER_SUBNET_0}
         - ${CLUSTER_SUBNET_1}
         - ${CLUSTER_SUBNET_2}
+datadog:
+  name: ${CLUSTER_NAME}
+  notify: 
+    - '@slack-arc-platform-ops'
+    - '@opsgenie-platform-tools'
+  monitors:
+    - 
+      tag: high-cpu-load
+      message: 'The CPU load is too high on server {{host.name}}.'
+      name: 'High CPU Load'
+      query: 'avg(last_4h):avg:system.cpu.idle{clustername:%(name)s} by {host} < 25'
+    -
+      tag: low-${VOLUME}-disk-space
+      message: 'Running out of ${VOLUME} dsik space on server {{host.name}}'
+      name: 'Low ${VOLUME} Disk Space'
+      query: 'avg(last_1h):avg:system.disk.free{clustername:%(name)s,device:${DEVICE}} by {host} < 10000000000'
+    -
+      tag: low-docker-data
+      message: 'Running low on LVM volume space for Docker data on server {{host.name}}.'
+      name: 'Low Docker Data Volume'
+      query: 'avg(last_1h):avg:docker.info.data_space_free{clustername:%(name)s} by {host < 1000000000'
+    -
+      tag: low-docker-metadata
+      message: 'Running low on LVM volume space for Docker metadata on server {{host.name}}.'
+      name: 'Low Docker Metadata'
+      query: 'avg(last_1h):avg:docker.info.metadata_space_free{clustername:%(name)s} by {host} < 100000000'
+    -
+      tag: low-usable-memory
+      message: 'The usable memory is too low on server {{host.name}}.'
+      name: 'Low Usable Memory'
+      query: 'avg(last_15m):avg:system.mem.pct_usable{clustername:%(name)s by {host} < 0.1'
+
+
+
+
