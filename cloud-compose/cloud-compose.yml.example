@@ -62,7 +62,7 @@ datadog:
       tag: low-docker-data
       message: 'Running low on LVM volume space for Docker data on server {{host.name}}.'
       name: 'Low Docker Data Volume'
-      query: 'avg(last_1h):avg:docker.info.data_space_free{clustername:%(name)s} by {host < 1000000000'
+      query: 'avg(last_1h):avg:docker.info.data_space_free{clustername:%(name)s} by {host} < 1000000000'
     -
       tag: low-docker-metadata
       message: 'Running low on LVM volume space for Docker metadata on server {{host.name}}.'
