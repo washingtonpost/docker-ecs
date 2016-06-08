@@ -44,6 +44,9 @@ datadog:
   notify: 
     - '@slack-arc-platform-ops'
     - '@opsgenie-platform-tools'
+  options:
+    notify_no_data: true
+    no_data_timeframe: 480
   monitors:
     - 
       tag: high-cpu-load
@@ -52,7 +55,7 @@ datadog:
       query: 'avg(last_4h):avg:system.cpu.idle{clustername:%(name)s} by {host} < 25'
     -
       tag: low-${VOLUME}-disk-space
-      message: 'Running out of ${VOLUME} dsik space on server {{host.name}}'
+      message: 'Running out of ${VOLUME} disk space on server {{host.name}}'
       name: 'Low ${VOLUME} Disk Space'
       query: 'avg(last_1h):avg:system.disk.free{clustername:%(name)s,device:${DEVICE}} by {host} < 10000000000'
     -
