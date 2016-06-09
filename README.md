@@ -23,7 +23,7 @@ Secrets can be configured using environment variables. [Envdir](https://pypi.pyt
 At a minimum you will need AWS_ACCESS_KEY_ID, AWS_REGION, and AWS_SECRET_ACCESS_KEY. If you are using a private Docker registry you also need to set ECS_ENGINE_AUTH_DATA and ECS_ENGINE_AUTH_TYPE. See the ECS Agent [configuration guide](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) for more details.
 
 ## How do I share config files?
-Since most of the config files are common between clusters, it is desirable to directly share the configuration between projects. The recommend directory structure is to have docker-ecs sub-directory and then a sub-directory for each cluster. For example if I had a test and prod mongodb cluster my directory structure would be:
+Since most of the config files are common between clusters, it is desirable to directly share the configuration between projects. The recommend directory structure is to have docker-ecs sub-directory and then a sub-directory for each cluster. For example if I had a test and prod cluster my directory structure would be:
 
 ```
 ecs/
@@ -33,7 +33,7 @@ ecs/
   templates/
 ```
 
-The docker-ecs directory would be a subtree merge of this Git project, the templates directory would be any common templates that only apply to your mongodb clusters, the the test and prod directories have the cloud-compose.yml files for your two mongodb clusters. Regardless of the directory structure, make sure the search_paths in your cloud-compose.yml reflect all the config directories and the order that you want to load the config files.
+The docker-ecs directory would be a subtree merge of this Git project, the templates directory would be any common templates that only apply to your clusters, the the test and prod directories have the cloud-compose.yml files for your two clusters. Regardless of the directory structure, make sure the search_paths in your cloud-compose.yml reflect all the config directories and the order that you want to load the config files.
 
 ## How do I create a subtree merge of this project?
 A subtree merge is an alternative to a Git submodules for copying the contents of one Github repo into another. It is easier to use once it is setup and does not require any special commands (unlike submodules) for others using your repo.
