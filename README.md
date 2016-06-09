@@ -16,11 +16,16 @@ pip install cloud-compose cloud-compose-cluster
 pip freeze -r > requirements.txt
 cloud-compose cluster up
 ```
+1. Once the cluster is up, monitor its health using the [Cloud Compose datadog plugin](https://github.com/cloud-compose/cloud-compose-datadog).
+```
+pip install cloud-compose-datadog
+cloud-compose datadog monitors up
+```
 
 # FAQ
 ## How do I manage secrets?
 Secrets can be configured using environment variables. [Envdir](https://pypi.python.org/pypi/envdir) is highly recommended as a tool for switching between sets of environment variables in case you need to manage multiple clusters.
-At a minimum you will need AWS_ACCESS_KEY_ID, AWS_REGION, and AWS_SECRET_ACCESS_KEY. If you are using a private Docker registry you also need to set ECS_ENGINE_AUTH_DATA and ECS_ENGINE_AUTH_TYPE. See the ECS Agent [configuration guide](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) for more details.
+At a minimum you will need AWS_ACCESS_KEY_ID, AWS_REGION, and AWS_SECRET_ACCESS_KEY. If you are using a private Docker registry you also need to set ECS_ENGINE_AUTH_DATA and ECS_ENGINE_AUTH_TYPE. See the ECS Agent [configuration guide](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) for more details. If you are using the datadog plugin you will also need DATADOG_API_KEY and DATADOG_APP_KEY.
 
 ## How do I share config files?
 Since most of the config files are common between clusters, it is desirable to directly share the configuration between projects. The recommend directory structure is to have docker-ecs sub-directory and then a sub-directory for each cluster. For example if I had a test and prod cluster my directory structure would be:
