@@ -61,7 +61,7 @@ datadog:
     # Uncomment the following monitor if using a /data partition
     # -
     #   tag: low-data-disk-space
-    #   message: 'Running out of /data disk space on server {{host.name}}'
+    #   message: 'Running out of data disk space on server {{host.name}}'
     #   name: 'Low /data Disk Space'
     #   query: 'avg(last_1h):avg:system.disk.free{clustername:%(name)s,device:/dev/xvdc} by {host} < 10000000000'    
     -
