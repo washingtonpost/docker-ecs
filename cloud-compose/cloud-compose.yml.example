@@ -79,7 +79,3 @@ datadog:
       message: 'The usable memory is too low on server {{host.name}}.'
       name: 'Low Usable Memory'
       query: 'avg(last_15m):avg:system.mem.pct_usable{clustername:%(name)s} by {host} < 0.1'
-
-
-
-
