@@ -42,8 +42,8 @@ cluster:
 datadog:
   name: ${CLUSTER_NAME}
   notify: 
-    - '@slack-arc-platform-ops'
-    - '@opsgenie-platform-tools'
+    - '@slack-${TEAM}'
+    - '@opsgenie-${TEAM}'
   options:
     notify_no_data: true
     no_data_timeframe: 480
