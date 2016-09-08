@@ -1,6 +1,8 @@
 version: '2'
 services:
   ecs:
+    ports:
+      - 51678-51679:51678-51679
     environment:
       INSTANCE_IP: ${INSTANCE_IP}
       ECS_CLUSTER: {{ name }}
@@ -10,6 +12,7 @@ services:
       {%- if ECS_ENGINE_AUTH_DATA is defined %}
       ECS_ENGINE_AUTH_TYPE: {{ ECS_ENGINE_AUTH_TYPE }}
       {%- endif %}
+      ECS_ENABLE_TASK_IAM_ROLE: "true"
     {%- if logging is defined and logging.driver is defined and logging.driver == "awslogs" %}
     logging:
       driver: awslogs
