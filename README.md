@@ -13,7 +13,7 @@ To use this project do the following:
 1. Create a new cluster using the [Cloud Compose cluster plugin](https://github.com/cloud-compose/cloud-compose-cluster).
 ```
 pip install cloud-compose cloud-compose-cluster
-pip freeze -r > requirements.txt
+pip freeze > requirements.txt
 cloud-compose cluster up
 ```
 1. Once the cluster is up, monitor its health using the [Cloud Compose datadog plugin](https://github.com/cloud-compose/cloud-compose-datadog).
