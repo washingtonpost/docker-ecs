@@ -19,3 +19,4 @@ services:
       ECS_CLUSTER: local_test
       ECS_AVAILABLE_LOGGING_DRIVERS: '["json-file","syslog","journald","gelf","fluentd","awslogs"]'
       ECS_ENABLE_TASK_IAM_ROLE: "true"
+      ECS_ENABLE_TASK_IAM_ROLE_NETWORK_HOST: "true"
