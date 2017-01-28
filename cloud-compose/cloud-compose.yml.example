@@ -7,9 +7,13 @@ cluster:
     driver: awslogs
     meta:
       group: /cloud-compose/${CLUSTER_NAME}
+  secrets:
+    ECS_ENGINE_AUTH_DATA: ${KMS_ENCRYPTED_DOCKERCFG}
+  environment:
+    ECS_ENGINE_AUTH_TYPE: dockercfg
   aws:
     ami: ${IMAGE_ID} or ${IMAGE_NAME_TAG}
-    instance_policy: '{ "Version": "2012-10-17", "Statement": [ { "Effect": "Allow", "Action": [ "ecs:DeregisterContainerInstance", "ecs:DiscoverPollEndpoint", "ecs:Poll", "ecs:RegisterContainerInstance", "ecs:StartTelemetrySession", "ecs:Submit*", "ecr:GetAuthorizationToken", "ecr:BatchCheckLayerAvailability", "ecr:GetDownloadUrlForLayer", "ecr:BatchGetImage" ], "Resource": "*" }, { "Action": [ "logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents" ], "Effect": "Allow", "Resource": "*" } ] }'
+    instance_policy: '{ "Version": "2012-10-17", "Statement": [ { "Effect": "Allow", "Action": [ "ecs:DeregisterContainerInstance", "ecs:DiscoverPollEndpoint", "ecs:Poll", "ecs:RegisterContainerInstance", "ecs:StartTelemetrySession", "ecs:Submit*", "ecr:GetAuthorizationToken", "ecr:BatchCheckLayerAvailability", "ecr:GetDownloadUrlForLayer", "ecr:BatchGetImage" ], "Resource": "*" }, { "Action": [ "logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents" ], "Effect": "Allow", "Resource": "*" }, { "Action": ["kms:Decrypt"], "Effect": "Allow", "Resource": ["${KMS_KEY_ARN}"] } ] }'
     username: ${IMAGE_USERNAME}
     terminate_protection: false
     security_groups:

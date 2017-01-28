@@ -4,10 +4,12 @@ services:
     environment:
       INSTANCE_IP: ${INSTANCE_IP}
       ECS_CLUSTER: {{ name }}
-      {%- if ECS_ENGINE_AUTH_DATA is defined %}
+      {%- if secrets.ECS_ENGINE_AUTH_DATA is defined %}
+      ECS_ENGINE_AUTH_DATA: "${ECS_ENGINE_AUTH_DATA}"
+      {%- elif ECS_ENGINE_AUTH_DATA is defined %}
       ECS_ENGINE_AUTH_DATA: '{{ ECS_ENGINE_AUTH_DATA }}'
       {%- endif %}
-      {%- if ECS_ENGINE_AUTH_DATA is defined %}
+      {%- if ECS_ENGINE_AUTH_TYPE is defined %}
       ECS_ENGINE_AUTH_TYPE: {{ ECS_ENGINE_AUTH_TYPE }}
       {%- endif %}
       {%- if ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION is defined %}
