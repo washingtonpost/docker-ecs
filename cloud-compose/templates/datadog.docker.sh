@@ -1,5 +1,5 @@
 # datadog.docker.sh
-{%- if secrets.DATADOG_API_KEY is defined %}
+{%- if secrets is defined and secrets.DATADOG_API_KEY is defined %}
 sh -c "sed 's/api_key:.*/api_key: $DATADOG_API_KEY/' /etc/dd-agent/datadog.conf.example > /etc/dd-agent/datadog.conf"
 {%- else %}
 sh -c "sed 's/api_key:.*/api_key: {{DATADOG_API_KEY}}/' /etc/dd-agent/datadog.conf.example > /etc/dd-agent/datadog.conf"
