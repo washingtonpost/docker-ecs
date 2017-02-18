@@ -9,6 +9,9 @@ services:
       {%- elif ECS_ENGINE_AUTH_DATA is defined %}
       ECS_ENGINE_AUTH_DATA: '{{ ECS_ENGINE_AUTH_DATA }}'
       {%- endif %}
+      {%- if ECS_RESERVED_MEMORY is defined %}
+      ECS_RESERVED_MEMORY: {{ ECS_RESERVED_MEMORY }}
+      {%- endif %}
       {%- if ECS_ENGINE_AUTH_TYPE is defined %}
       ECS_ENGINE_AUTH_TYPE: {{ ECS_ENGINE_AUTH_TYPE }}
       {%- endif %}
