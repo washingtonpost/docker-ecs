@@ -12,7 +12,9 @@ services:
       {%- if ECS_RESERVED_MEMORY is defined %}
       ECS_RESERVED_MEMORY: {{ ECS_RESERVED_MEMORY }}
       {%- endif %}
-      {%- if ECS_ENGINE_AUTH_TYPE is defined %}
+      {%- if secrets.ECS_ENGINE_AUTH_TYPE is defined %}
+      ECS_ENGINE_AUTH_TYPE: "${ECS_ENGINE_AUTH_TYPE}"
+      {%- elif ECS_ENGINE_AUTH_TYPE is defined %}
       ECS_ENGINE_AUTH_TYPE: {{ ECS_ENGINE_AUTH_TYPE }}
       {%- endif %}
       {%- if ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION is defined %}
