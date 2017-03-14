@@ -4,32 +4,52 @@ services:
     environment:
       INSTANCE_IP: ${INSTANCE_IP}
       ECS_CLUSTER: {{ name }}
-      {%- if secrets.ECS_ENGINE_AUTH_DATA is defined %}
+
+      {%- if secrets is defined and secrets.ECS_ENGINE_AUTH_DATA is defined %}
       ECS_ENGINE_AUTH_DATA: "${ECS_ENGINE_AUTH_DATA}"
       {%- elif ECS_ENGINE_AUTH_DATA is defined %}
       ECS_ENGINE_AUTH_DATA: '{{ ECS_ENGINE_AUTH_DATA }}'
       {%- endif %}
-      {%- if ECS_RESERVED_MEMORY is defined %}
+
+      {%- if environment is defined and environment.ECS_RESERVED_MEMORY is defined %}
+      ECS_RESERVED_MEMORY: "${ECS_RESERVED_MEMORY}"
+      {%- elif ECS_ENGINE_AUTH_TYPE is defined %}
       ECS_RESERVED_MEMORY: {{ ECS_RESERVED_MEMORY }}
       {%- endif %}
-      {%- if secrets.ECS_ENGINE_AUTH_TYPE is defined %}
+
+      {%- if environment is defined and environment.ECS_ENGINE_AUTH_TYPE is defined %}
       ECS_ENGINE_AUTH_TYPE: "${ECS_ENGINE_AUTH_TYPE}"
       {%- elif ECS_ENGINE_AUTH_TYPE is defined %}
       ECS_ENGINE_AUTH_TYPE: {{ ECS_ENGINE_AUTH_TYPE }}
       {%- endif %}
-      {%- if ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION is defined %}
+
+      {%- if environment is defined and environment.ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION is defined %}
+      ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION: "${ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION}"
+      {%- elif ECS_ENGINE_AUTH_TYPE is defined %}
       ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION: {{ ECS_ENGINE_TASK_CLEANUP_WAIT_DURATION }}
       {%- endif %}
-      {%- if ECS_DISABLE_IMAGE_CLEANUP is defined %}
+
+      {%- if environment is defined and environment.ECS_DISABLE_IMAGE_CLEANUP is defined %}
+      ECS_DISABLE_IMAGE_CLEANUP: "${ECS_DISABLE_IMAGE_CLEANUP}"
+      {%- elif ECS_ENGINE_AUTH_TYPE is defined %}
       ECS_DISABLE_IMAGE_CLEANUP: {{ ECS_DISABLE_IMAGE_CLEANUP }}
       {%- endif %}
-      {%- if ECS_IMAGE_CLEANUP_INTERVAL is defined %}
+
+      {%- if environment is defined and environment.ECS_IMAGE_CLEANUP_INTERVAL is defined %}
+      ECS_IMAGE_CLEANUP_INTERVAL: "${ECS_IMAGE_CLEANUP_INTERVAL}"
+      {%- elif ECS_ENGINE_AUTH_TYPE is defined %}
       ECS_IMAGE_CLEANUP_INTERVAL: {{ ECS_IMAGE_CLEANUP_INTERVAL }}
       {%- endif %}
-      {%- if ECS_IMAGE_MINIMUM_CLEANUP_AGE is defined %}
+
+      {%- if environment is defined and environment.ECS_IMAGE_MINIMUM_CLEANUP_AGE is defined %}
+      ECS_IMAGE_MINIMUM_CLEANUP_AGE: "${ECS_IMAGE_MINIMUM_CLEANUP_AGE}"
+      {%- elif ECS_ENGINE_AUTH_TYPE is defined %}
       ECS_IMAGE_MINIMUM_CLEANUP_AGE: {{ ECS_IMAGE_MINIMUM_CLEANUP_AGE }}
       {%- endif %}
-      {%- if ECS_NUM_IMAGES_DELETE_PER_CYCLE is defined %}
+
+      {%- if environment is defined and environment.ECS_NUM_IMAGES_DELETE_PER_CYCLE is defined %}
+      ECS_NUM_IMAGES_DELETE_PER_CYCLE: "${ECS_NUM_IMAGES_DELETE_PER_CYCLE}"
+      {%- elif ECS_ENGINE_AUTH_TYPE is defined %}
       ECS_NUM_IMAGES_DELETE_PER_CYCLE: {{ ECS_NUM_IMAGES_DELETE_PER_CYCLE }}
       {%- endif %}
     {%- if logging is defined and logging.driver is defined and logging.driver == "awslogs" %}
