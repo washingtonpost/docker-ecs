@@ -24,8 +24,21 @@ cloud-compose datadog monitors up
 
 # FAQ
 ## How do I manage secrets?
-Secrets can be configured using environment variables. [Envdir](https://pypi.python.org/pypi/envdir) is highly recommended as a tool for switching between sets of environment variables in case you need to manage multiple clusters.
-At a minimum you will need AWS_ACCESS_KEY_ID, AWS_REGION, and AWS_SECRET_ACCESS_KEY. If you are using a private Docker registry you also need to set ECS_ENGINE_AUTH_DATA and ECS_ENGINE_AUTH_TYPE. See the ECS Agent [configuration guide](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) for more details. If you are using the datadog plugin you will also need DATADOG_API_KEY and DATADOG_APP_KEY.
+
+The preferred method for managing secrets is to store the encrypted secrets in the `cluster.secrets` object. KMS decryption is built-in to cloud-compose. Simply add your secrets to the secrets section of the cloud-compose.yml and then add the grant Decrypt permissions on the KMS key to the instance_profile section.
+
+```
+cluster
+  secrets:
+    ECS_ENGINE_AUTH_DATA: "AQECAHgq..."
+  instance_policy: '{ "Statement": [ { "Action": [ "ec2:CreateSnapshot", "ec2:CreateTags", "ec2:DeleteSnapshot", "ec2:DescribeInstances", "ec2:DescribeSnapshotAttribute", "ec2:DescribeSnapshots", "ec2:DescribeVolumeAttribute", "ec2:DescribeVolumeStatus", "ec2:DescribeVolumes", "ec2:ModifySnapshotAttribute", "ec2:ResetSnapshotAttribute", "logs:CreateLogStream", "logs:PutLogEvents" ], "Effect": "Allow", "Resource": [ "*" ] }, { "Action": ["kms:Decrypt"], "Effect": "Allow", "Resource": ["arn:aws:kms:us-east-1:111111111111:key/22222222-2222-2222-2222-222222222222"] } ] }'
+```
+
+Secrets can also be configured using environment variables. [Envdir](https://pypi.python.org/pypi/envdir) is highly recommended as a tool for switching between sets of environment variables in case you need to manage multiple clusters.
+
+If you are using a private Docker registry you also need to set ECS_ENGINE_AUTH_DATA and ECS_ENGINE_AUTH_TYPE. See the ECS Agent [configuration guide](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) for more details. If you are using the datadog plugin you will also need DATADOG_API_KEY and DATADOG_APP_KEY.
+
+At a minimum you will need AWS_ACCESS_KEY_ID, AWS_REGION, and AWS_SECRET_ACCESS_KEY.  We recommend storing AWS authentication secrets only in the environment.
 
 ## How do I share config files?
 Since most of the config files are common between clusters, it is desirable to directly share the configuration between projects. The recommend directory structure is to have docker-ecs sub-directory and then a sub-directory for each cluster. For example if I had a test and prod cluster my directory structure would be:
