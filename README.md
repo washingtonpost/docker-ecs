@@ -68,7 +68,7 @@ git remote add -f docker-ecs git@github.com:washingtonpost/docker-ecs.git
 git merge -s ours --no-commit --allow-unrelated-histories docker-ecs/master
 # make a directory to merge the changes into
 mkdir docker-ecs
-# actually do the merge
+# actually do the merge. note prefix specified the path from the root of the repository
 git read-tree --prefix=ecs/docker-ecs/ -u docker-ecs/master
 # commit the changes
 git commit -m 'Added docker-ecs subtree'
