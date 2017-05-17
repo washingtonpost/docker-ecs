@@ -65,7 +65,7 @@ cd my-configs/ecs
 # add the git remote
 git remote add -f docker-ecs git@github.com:washingtonpost/docker-ecs.git
 # pull in the git remote, but don't commit it
-git merge -s ours --no-commit docker-ecs/master
+git merge -s ours --no-commit --allow-unrelated-histories docker-ecs/master
 # make a directory to merge the changes into
 mkdir docker-ecs
 # actually do the merge
