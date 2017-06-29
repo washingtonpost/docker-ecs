@@ -9,7 +9,7 @@ To use this project do the following:
 1. Create a sub-directory for your cluster (e.g. `mkdir my-configs/ecs/foobar`)
 1. Clone this project into your Github repo using [subtree merge](#initial-subtree-merge)
 1. Copy the docker-ecs/cloud-compose/cloud-compose.yml.example to your cluster sub-directory
-1. Modify the cloud-compose.yml to fit your needs
+1. Rename to cloud-compose.yml and modify to fit your needs
 1. Create a new cluster using the [Cloud Compose cluster plugin](https://github.com/cloud-compose/cloud-compose-cluster).
 ```
 pip install cloud-compose cloud-compose-cluster
