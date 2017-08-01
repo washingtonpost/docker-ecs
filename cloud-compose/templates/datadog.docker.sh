@@ -6,4 +6,5 @@ sh -c "sed 's/api_key:.*/api_key: {{DATADOG_API_KEY}}/' /etc/dd-agent/datadog.co
 {%- endif %}
 # Note 'bind_host: 0.0.0.0' will break the built in JMX collector on the host, but it is required for sending metrics directly from Docker containers to the dd-agent
 echo 'bind_host: 0.0.0.0' >> /etc/dd-agent/datadog.conf
+echo 'process_agent_enabled: true' >> /etc/dd-agent/datadog.conf
 service datadog-agent restart
