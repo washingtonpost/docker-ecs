@@ -30,6 +30,15 @@ services:
       {%- if ECS_NUM_IMAGES_DELETE_PER_CYCLE is defined %}
       ECS_NUM_IMAGES_DELETE_PER_CYCLE: {{ ECS_NUM_IMAGES_DELETE_PER_CYCLE }}
       {%- endif %}
+      {%- if ECS_DISABLE_PRIVILEGED is defined %}
+      ECS_DISABLE_PRIVILEGED: {{ ECS_DISABLE_PRIVILEGED }}
+      {%- endif %}
+      {%- if ECS_INSTANCE_ATTRIBUTES is defined %}
+      ECS_INSTANCE_ATTRIBUTES: {{ ECS_INSTANCE_ATTRIBUTES }}
+      {%- endif %}
+      {%- if ECS_ENABLE_CONTAINER_METADATA is defined %}
+      ECS_ENABLE_CONTAINER_METADATA: {{ ECS_ENABLE_CONTAINER_METADATA }}
+      {%- endif %}
     {%- if logging is defined and logging.driver is defined and logging.driver == "awslogs" %}
     logging:
       driver: awslogs
