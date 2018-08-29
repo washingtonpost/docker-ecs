@@ -1,6 +1,7 @@
 version: '2'
 services:
   ecs:
+    restart: always
     environment:
       INSTANCE_IP: ${INSTANCE_IP}
       ECS_CLUSTER: {{ name }}
