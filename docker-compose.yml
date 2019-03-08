@@ -3,6 +3,7 @@ services:
   ecs:
     container_name: ecs-agent
     image: amazon/amazon-ecs-agent:latest
+    network_mode: "host"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/var/log/ecs/:/log"
