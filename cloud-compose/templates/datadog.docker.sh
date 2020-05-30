@@ -9,4 +9,4 @@ sh -c "sed -i 's/# bind_host:.*/bind_host: 0.0.0.0/' /etc/dd-agent/datadog.conf"
 sh -c "sed -i '/\[Main\]/aapm_enabled: true' /etc/dd-agent/datadog.conf"
 sh -c "sed -i '/\[Main\]/aprocess_agent_enabled: true' /etc/dd-agent/datadog.conf"
 
-service datadog-agent restart
+sudo rm /opt/datadog-agent/agent/datadog-cert.pem && sudo service datadog-agent restart
